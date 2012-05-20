@@ -1,0 +1,144 @@
+from daemonwatch import *
+__doc__ = """How to ensure that a given (HTTP) service stays up and running."""
+Monitor(
+	Service(
+		name="redis-server",
+		monitor=(
+			ProcessInfo(
+				command = 'redis-server',
+				freq=Time.s(1),
+				fail=[
+					Incident(
+						# If we have 5 errors during 5 seconds...
+						errors=5,
+						during=Time.s(5),
+						actions=[
+							# We kill the 'myservice-start.py' script if it exists
+							# and (re)start it, so that the 'http://localhost:8000' will
+							# become available
+							# NOTE: Restart will make the process a child of the daemonwatch, so
+							# you might prefer to use something like upstart
+							Restart("/etc/init.d/redis-server restart")
+						]
+					)
+				]
+			),
+			ProcessInfo(
+				command = 'monit',
+				freq=Time.s(1),
+				fail=[
+					Incident(
+						# If we have 5 errors during 5 seconds...
+						errors=5,
+						during=Time.s(5),
+						actions=[
+							# We kill the 'myservice-start.py' script if it exists
+							# and (re)start it, so that the 'http://localhost:8000' will
+							# become available
+							# NOTE: Restart will make the process a child of the daemonwatch, so
+							# you might prefer to use something like upstart
+							Restart("/etc/init.d/monit restart")
+						]
+					)
+				]
+			),
+			ProcessInfo(
+				command = 'rsyslog',
+				freq=Time.s(1),
+				fail=[
+					Incident(
+						# If we have 5 errors during 5 seconds...
+						errors=5,
+						during=Time.s(5),
+						actions=[
+							# We kill the 'myservice-start.py' script if it exists
+							# and (re)start it, so that the 'http://localhost:8000' will
+							# become available
+							# NOTE: Restart will make the process a child of the daemonwatch, so
+							# you might prefer to use something like upstart
+							Restart("/etc/init.d/rsyslog restart")
+						]
+					)
+				]
+			),
+			ProcessInfo(
+				command = 'exim4',
+				freq=Time.s(1),
+				fail=[
+					Incident(
+						# If we have 5 errors during 5 seconds...
+						errors=5,
+						during=Time.s(5),
+						actions=[
+							# We kill the 'myservice-start.py' script if it exists
+							# and (re)start it, so that the 'http://localhost:8000' will
+							# become available
+							# NOTE: Restart will make the process a child of the daemonwatch, so
+							# you might prefer to use something like upstart
+							Restart("/etc/init.d/monit restart")
+						]
+					)
+				]
+			),
+			ProcessInfo(
+				command = 'portmap',
+				freq=Time.s(1),
+				fail=[
+					Incident(
+						# If we have 5 errors during 5 seconds...
+						errors=5,
+						during=Time.s(5),
+						actions=[
+							# We kill the 'myservice-start.py' script if it exists
+							# and (re)start it, so that the 'http://localhost:8000' will
+							# become available
+							# NOTE: Restart will make the process a child of the daemonwatch, so
+							# you might prefer to use something like upstart
+							Restart("/etc/init.d/monit restart")
+						]
+					)
+				]
+			),
+			ProcessInfo(
+				command = 'cron',
+				freq=Time.s(1),
+				fail=[
+					Incident(
+						# If we have 5 errors during 5 seconds...
+						errors=5,
+						during=Time.s(5),
+						actions=[
+							# We kill the 'myservice-start.py' script if it exists
+							# and (re)start it, so that the 'http://localhost:8000' will
+							# become available
+							# NOTE: Restart will make the process a child of the daemonwatch, so
+							# you might prefer to use something like upstart
+							Restart("/etc/init.d/monit restart")
+						]
+					)
+				]
+			),
+			ProcessInfo(
+				command = 'sshd',
+				freq=Time.s(1),
+				fail=[
+					Incident(
+						# If we have 5 errors during 5 seconds...
+						errors=5,
+						during=Time.s(5),
+						actions=[
+							# We kill the 'myservice-start.py' script if it exists
+							# and (re)start it, so that the 'http://localhost:8000' will
+							# become available
+							# NOTE: Restart will make the process a child of the daemonwatch, so
+							# you might prefer to use something like upstart
+							Restart("/etc/init.d/monit restart")
+						]
+					)
+				]
+			),
+
+
+		)
+	)
+).run()
