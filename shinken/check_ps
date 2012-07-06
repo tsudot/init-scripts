@@ -133,7 +133,7 @@ get_vals() {
 
     tmp_output=`ps aux | grep "$process" | grep -v $0`
     ps_mem=`ps ax | grep $process | awk '{print "ps -p "$1" -o %mem="}' | sh | awk '{total_mem+=$1} END {print total_mem}'`;
-    ps_cpu=`ps ax | grep $process | awk '{print "ps -p "$1" -o %mem="}' | sh | awk '{total_mem+=$1} END {print total_mem}'`;
+    ps_cpu=`ps ax | grep $process | awk '{print "ps -p "$1" -o %cpu="}' | sh | awk '{total_cpu+=$1} END {print total_cpu}'`;
 
     if [ -z "$tmp_output" ]
     then
